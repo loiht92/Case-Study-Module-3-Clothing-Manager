@@ -247,17 +247,17 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
     }
 
     @Override
-    public List<Clothing> findByCategoryID(int id, String requestStatus) throws SQLException {
+    public List<Clothing> findByCategoryID(int id) throws SQLException {
         List<Clothing> clothingList = new ArrayList<>();
         String query =
                 "select cl.id, cl.name, cl.description, cl.picture, cl.price, cl.origin, ca.category_name, ca.status\n" +
-                "from clothing cl inner join category ca on cl.category_id = ca.category_id where cl.category_id = ? and ca.status like ?";
+                "from clothing cl inner join category ca on cl.category_id = ca.category_id where cl.category_id = ?";
         try (
                 Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(query))
         {
          statement.setInt(1, id);
-         statement.setString(2, "%" + requestStatus.trim()+ "%");
+         //statement.setString(2, "%" + requestStatus.trim()+ "%");
          ResultSet resultSet = statement.executeQuery();
          while (resultSet.next()){
             int clothing_id = resultSet.getInt(1);
@@ -269,7 +269,7 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
             String category_name = resultSet.getString(7);
             String status = resultSet.getString(8);
 
-            Clothing clothing = new Clothing(clothing_id, name,des,picture,price,origin,category_name,status);
+            Clothing clothing = new Clothing(clothing_id, name,des,picture,price,origin,category_name, status);
             clothingList.add(clothing);
         }
 

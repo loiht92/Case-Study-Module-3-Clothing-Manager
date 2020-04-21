@@ -52,6 +52,9 @@
         <%--        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">--%>
         <ul class="navbar-nav ">
             <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
+                <a class="nav-link" href="${pageContext.request.contextPath}/clothing"><button type=button class="btn">HOME</button></a>
+            </li>
+            <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
                 <a class="nav-link" href="${pageContext.request.contextPath}/clothing?action=listClothing"><button type=button class="btn">CLOTHING</button></a>
             </li>
             <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
@@ -76,17 +79,25 @@
 <%--                <button type="submit" class =" btn btn-default btn-sm ">--%>
 <%--                    <span class =" glyphicon glyphicon-filter "></span> Bộ lọc </button>--%>
 
-                <select name="category_id" class =" btn btn-default btn-sm>
+                <select name="category_id" style="width: 70px; height: 40px">
                     <c:forEach items='${requestScope["categories"]}' var="category">
                         <option value="${category.getId()}">${category.getName()}</option>
 
                     </c:forEach>
 
-                </select>
+                </select>&emsp;
+
+<%--                <select name="status" style="width: 70px; height: 40px">--%>
+<%--                    <c:forEach items='${requestScope["categories"]}' var="category">--%>
+<%--                        <option value="${category.getStatus()}">${category.getStatus()}</option>--%>
+
+<%--                </c:forEach>--%>
+
+<%--                </select>&emsp;&emsp;--%>
 
 
 
-                <button type="submit" name="action" value="findByCategoryName">Tìm kiếm</button>
+                <button type="submit" name="action" value="findByCategoryName" class="btn">Tìm kiếm</button>
 <%--                                <div class="input-group-append" >--%>
 <%--                <button type="submit" class =" btn btn-default btn-sm ">--%>
 <%--                    <span class =" glyphicon glyphicon-filter "></span> Bộ lọc </button>--%>

@@ -87,4 +87,22 @@ public class CategoryServiceImpl extends DatabaseInit implements ICategoryServic
         }
         return rowDeleted;
     }
+
+    @Override
+    public List<Category> findByStatus(String status) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+        String query = "select * from category where status like ?";
+        try(Connection connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, "%" +status +"%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                String category_name = resultSet.getString(2);
+                Category category = new Category(id, category_name, status);
+                categories.add(category);
+            }
+        }
+        return categories;
+    }
 }

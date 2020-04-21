@@ -217,8 +217,8 @@ public class ClothingServlet extends HttpServlet {
        int categoryId = Integer.parseInt(request.getParameter("category_id"));
 
 
-       String status = request.getParameter("status");
-        List<Clothing> clothing = this.clothingService.findByCategoryID(categoryId, status);
+       //String status = request.getParameter("status");
+        List<Clothing> clothing = this.clothingService.findByCategoryID(categoryId);
 
        request.setAttribute("clothing", clothing);
        List<Category> categories = this.categoryService.findAll();

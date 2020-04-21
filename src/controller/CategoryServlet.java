@@ -24,6 +24,8 @@ public class CategoryServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
 
         try {
@@ -34,6 +36,9 @@ public class CategoryServlet extends HttpServlet {
                 case "editCategory":
                     editCategory(request, response);
                     break;
+                case "findByCategoryStatus":
+                    findByCategoryStatus(request, response);
+                    break;
                 default:
                     break;
 
@@ -43,9 +48,19 @@ public class CategoryServlet extends HttpServlet {
         }
     }
 
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         String action = request.getParameter("action");
+        String status = request.getParameter("status");
+        if (status != null){
+            try {
+                findByCategoryStatus(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             switch (action != null ? action : "") {
@@ -63,7 +78,10 @@ public class CategoryServlet extends HttpServlet {
                     break;
                 case "findAllStatus":
                     this.findAllCategoryStatus(request, response);
-
+                    break;
+                case "findByCategoryStatus":
+                    showFindByCategoryStatus(request, response);
+                    break;
                 default:
                     listClothingCategory(request, response);
                     break;
@@ -72,6 +90,28 @@ public class CategoryServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+
+    private void findByCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws SQLException,
+            ServletException, IOException {
+        String status = request.getParameter("status");
+        List<Category> categories = this.categoryService.findByStatus(status);
+
+        RequestDispatcher requestDispatcher;
+        if (categories == null){
+            requestDispatcher = request.getRequestDispatcher("error-404.jsp");
+        }else {
+            request.setAttribute("categories", categories);
+            requestDispatcher = request.getRequestDispatcher("listCategory/list_category.jsp");
+            requestDispatcher.forward(request, response);
+        }
+    }
+
+    private void showFindByCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCategory/list_category.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
 
 
     private void findAllCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,8 +125,8 @@ public class CategoryServlet extends HttpServlet {
     private void listClothingCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Clothing> clothing = this.clothingService.findAllClothingCategory();
         request.setAttribute("clothing", clothing);
-//        List<Category> categories = this.categoryService.findAll();
-//        request.setAttribute("categories",categories);
+        List<Category> categories = this.categoryService.findAll();
+        request.setAttribute("categories",categories);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listHome/list_clothing_category.jsp");
         requestDispatcher.forward(request, response);

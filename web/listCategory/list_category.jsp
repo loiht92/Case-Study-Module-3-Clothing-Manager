@@ -69,9 +69,8 @@
 <%--                </c:forEach>--%>
 <%--            </select> &emsp;--%>
             <%--                    <div class="input-group-append" >--%>
-                <div><input type="text" name="category_name" placeholder="Enter category name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="width: 100px; height: 40px;"></div>
-                <button type="submit" value="findByCategoryName" class="btn"><i class="fa fa-search"></i></button>&emsp;&emsp;
-
+                <div><input type="text" name="status" placeholder="Enter status" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="width: 100px; height: 40px;"></div>
+                <button type="submit" value="findByCategoryStatus" class="btn"><i class="fa fa-search"></i></button>&emsp;&emsp;
 
 
                 <a class="btn btn-success btn-sm ml-3" href="cart.html">

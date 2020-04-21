@@ -15,6 +15,8 @@ public interface ICategoryService {
 
     public boolean remove(int id) throws SQLException;
 
+    List<Category> findByStatus(String status) throws SQLException;
+
 
 }
 

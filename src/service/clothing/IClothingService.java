@@ -26,7 +26,9 @@ public interface IClothingService {
 
     List<String> findAllCategoryStatus();
 
-    List<Clothing> findByCategoryID(int id, String status) throws SQLException;
+    //List<Clothing> findByCategoryID(int id, String status) throws SQLException;
+
+    List<Clothing> findByCategoryID(int id) throws SQLException;
 
 
 }

@@ -25,26 +25,13 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" style="font-size: 30px; font-weight: bold; color: white">THE BOUTIQUE</a>
-        <%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"--%>
-        <%--                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">--%>
-        <%--            <span class="navbar-toggler-icon"></span>--%>
-        <%--        </button>--%>
-        <%--<p>--%>
-        <%--    <a href="${pageContext.request.contextPath}/clothing?action=listClothing">Clothing-Manager</a>--%>
-        <%--    <a href="${pageContext.request.contextPath}/category?action=listCategory">Category-Manager</a>--%>
-        <%--</p>--%>
-        <%--        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">--%>
+
         <ul class="navbar-nav ">
             <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
                 <a class="nav-link" href="${pageContext.request.contextPath}/category">HOME</a>
             </li> &emsp;&emsp;
-
-            <%--            <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">--%>
-            <%--                <a class="nav-link" href="${pageContext.request.contextPath}/category?action = listCategory">CATEGORY</a>--%>
-            <%--            </li> &emsp;&emsp;--%>
-
-
         </ul>
+    </div>
 </nav>
 
 <div align="center">

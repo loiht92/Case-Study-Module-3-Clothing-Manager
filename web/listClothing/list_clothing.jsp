@@ -41,15 +41,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" style="font-size: 30px; font-weight: bold; color: white">THE B<i class='fas fa-cannabis' style='font-size:48px;color:red'></i>UTIQUE</a>
-        <%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"--%>
-        <%--                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">--%>
-        <%--            <span class="navbar-toggler-icon"></span>--%>
-        <%--        </button>--%>
-        <%--<p>--%>
-        <%--    <a href="${pageContext.request.contextPath}/clothing?action=listClothing">Clothing-Manager</a>--%>
-        <%--    <a href="${pageContext.request.contextPath}/category?action=listCategory">Category-Manager</a>--%>
-        <%--</p>--%>
-        <%--        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">--%>
+
         <ul class="navbar-nav ">
             <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
                 <a class="nav-link" href="${pageContext.request.contextPath}/clothing"><button class="btn"><i class="fa fa-home"></i>HOME</button></a>
@@ -61,17 +53,6 @@
         </ul>
 
         <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/clothing?action=listClothing" method="get">
-            <%--                <div class="input-group input-group-sm">--%>
-            <%--            <input type="hidden" name="action" value="findByStatus" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">&emsp;--%>
-            <%--            <select name="status" style="width: 100px; height: 40px">--%>
-            <%--                <c:forEach items='${requestScope["statuses"]}' var="status">--%>
-            <%--                    <option name="status">${status}</option>--%>
-            <%--                </c:forEach>--%>
-            <%--            </select> &emsp;--%>
-            <%--            &lt;%&ndash;                    <div class="input-group-append" >&ndash;%&gt;--%>
-            <%--            <button type="submit" class="btn btn-secondary btn-number">--%>
-            <%--                <i class="fa fa-search"></i>--%>
-            <%--            </button>--%>
 
             <div><input type="text" name="price" placeholder="Enter price" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" style="width: 100px; height: 40px;"></div>
             <button type="submit" value="findByPrice" class="btn"><i class="fa fa-search"></i></button>&emsp;&emsp;
@@ -81,6 +62,7 @@
                 <span class="badge badge-light">3</span>
             </a>
         </form>
+    </div>
 
 </nav>
 
@@ -116,19 +98,6 @@
         </tbody>
         </c:forEach>
 
-
-        <%--    <c:forEach items='${requestScope["clothing"]}' var="clothing">--%>
-        <%--        <tr>--%>
-        <%--            <td>${clothing.getId()}</td>--%>
-        <%--            <td>${clothing.getName()}</td>--%>
-        <%--            <td>${clothing.getDescription()}</td>--%>
-        <%--            <td><img src="${clothing.getPicture()}" alt="img" width="40%" height="auto"></td>--%>
-        <%--            <td>${clothing.getPrice()}</td>--%>
-        <%--            <td>${clothing.getOrigin()}</td>--%>
-        <%--            <td><a href="/clothing?action=editClothing&id=${clothing.getId()}">edit</a></td>--%>
-        <%--            <td><a href="/clothing?action=deleteClothing&id=${clothing.getId()}">delete</a></td>--%>
-        <%--        </tr>--%>
-        <%--    </c:forEach>--%>
 </div>
 </body>
 </html>

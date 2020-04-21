@@ -260,24 +260,24 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
 
         try (
                 Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(selectNameByID))
-        {
-         statement.setInt(1, id);
+                PreparedStatement statement = connection.prepareStatement(selectNameByID)) {
+            statement.setInt(1, id);
 
-         ResultSet resultSet = statement.executeQuery();
-         while (resultSet.next()){
-            int clothing_id = resultSet.getInt(1);
-            String name = resultSet.getString(2);
-            String des = resultSet.getString(3);
-            String picture = resultSet.getString(4);
-            int price = resultSet.getInt(5);
-            String origin = resultSet.getString(6);
-            String category_name = resultSet.getString(7);
-            String status = resultSet.getString(8);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
 
-            Clothing clothing = new Clothing(clothing_id, name,des,picture,price,origin,category_name, status);
-            clothingList.add(clothing);
-        }
+                int clothing_id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                String des = resultSet.getString(3);
+                String picture = resultSet.getString(4);
+                int price = resultSet.getInt(5);
+                String origin = resultSet.getString(6);
+                String category_name = resultSet.getString(7);
+                String status = resultSet.getString(8);
+
+                Clothing clothing = new Clothing(clothing_id, name, des, picture, price, origin, category_name, status);
+                clothingList.add(clothing);
+            }
 
         }
         return clothingList;

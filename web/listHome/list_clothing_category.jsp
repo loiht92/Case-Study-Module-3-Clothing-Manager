@@ -41,15 +41,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" style="font-size: 30px; font-weight: bold; color: white">THE B<i class='fas fa-cannabis' style='font-size:48px;color:red'></i>UTIQUE</a>
-        <%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"--%>
-        <%--                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">--%>
-        <%--            <span class="navbar-toggler-icon"></span>--%>
-        <%--        </button>--%>
-        <%--<p>--%>
-        <%--    <a href="${pageContext.request.contextPath}/clothing?action=listClothing">Clothing-Manager</a>--%>
-        <%--    <a href="${pageContext.request.contextPath}/category?action=listCategory">Category-Manager</a>--%>
-        <%--</p>--%>
-        <%--        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">--%>
+
         <ul class="navbar-nav ">
             <li class="nav-item " style="font-size: 25px; font-weight: bold; color: white">
                 <a class="nav-link" href="${pageContext.request.contextPath}/clothing"><button type=button class="btn">HOME</button></a>
@@ -69,15 +61,6 @@
         </ul>
 
         <form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/clothing" method="get">
-            <%--                <div class="input-group input-group-sm">--%>
-<%--            <input type="hidden" name="action" value="findByStatus" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">&emsp;--%>
-<%--            <select name="status" style="width: 100px; height: 40px">--%>
-<%--                <c:forEach items='${requestScope["statuses"]}' var="status">--%>
-<%--                    <option name="status" style="font-size: 25px">${status}</option>--%>
-<%--                </c:forEach>--%>
-<%--            </select> &emsp;--%>
-<%--                <button type="submit" class =" btn btn-default btn-sm ">--%>
-<%--                    <span class =" glyphicon glyphicon-filter "></span> Bộ lọc </button>--%>
 
                 <select name="category_id" style="width: 70px; height: 40px">
                     <c:forEach items='${requestScope["categories"]}' var="category">
@@ -87,28 +70,14 @@
 
                 </select>&emsp;
 
-<%--                <select name="status" style="width: 70px; height: 40px">--%>
-<%--                    <c:forEach items='${requestScope["categories"]}' var="category">--%>
-<%--                        <option value="${category.getStatus()}">${category.getStatus()}</option>--%>
-
-<%--                </c:forEach>--%>
-
-<%--                </select>&emsp;&emsp;--%>
-
-
-
-                <button type="submit" name="action" value="findByCategoryName" class="btn">Tìm kiếm</button>
-<%--                                <div class="input-group-append" >--%>
-<%--                <button type="submit" class =" btn btn-default btn-sm ">--%>
-<%--                    <span class =" glyphicon glyphicon-filter "></span> Bộ lọc </button>--%>
-
-
+            <button type="submit" name="action" value="findByCategoryName" class="btn">Tìm kiếm</button>
 
             <a class="btn btn-success btn-sm ml-3" href="cart.html">
                 <i class="fa fa-shopping-cart"></i> Cart
                 <span class="badge badge-light">3</span>
             </a>
         </form>
+    </div>
 
 </nav>
 <div class="container-fluid">

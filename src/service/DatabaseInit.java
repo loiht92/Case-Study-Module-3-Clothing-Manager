@@ -10,13 +10,17 @@ public class DatabaseInit {
     private static final String jdbcPass = "loi123456";
 
     protected static Connection getConnection() {
+
         Connection connection = null;
         try {
+
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPass);
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         return connection;
     }
 }

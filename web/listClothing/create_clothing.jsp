@@ -80,13 +80,7 @@
                 <input type="text" class="form-control" name ="origin" placeholder="Enter origin">
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2">Category ID:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name ="category_id" placeholder="Enter category Id">
-            </div>
 
-        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
@@ -96,7 +90,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">SaVe</button>
+                <button type="submit" class="btn btn-default">Save</button>
                 <a href="/clothing"></a>
             </div>
         </div>

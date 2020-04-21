@@ -101,8 +101,8 @@
             <td>${categories.getId()}</td>
             <td>${categories.getName()}</td>
             <td>${categories.getStatus()}</td>
-            <td><a href="/category?action=editCategory&id=${categories.getId()}"><button type=button class="btn"><i class="fas fa-edit"></i></button></a></td>
-            <td><a href="/category?action=deleteCategory&id=${categories.getId()}"><button type=button class="btn"><i class="fas fa-trash"></i></button></a></td>
+            <td style="text-align: center"><a href="/category?action=editCategory&id=${categories.getId()}"><button type=button class="btn"><i class="fas fa-edit"></i></button></a></td>
+            <td style="text-align: center"><a href="/category?action=deleteCategory&id=${categories.getId()}"><button type=button class="btn"><i class="fas fa-trash"></i></button></a></td>
         </tr>
         </tbody>
         </c:forEach>

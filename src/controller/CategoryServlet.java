@@ -24,6 +24,7 @@ public class CategoryServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
@@ -49,12 +50,11 @@ public class CategoryServlet extends HttpServlet {
     }
 
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         String action = request.getParameter("action");
         String status = request.getParameter("status");
-        if (status != null){
+        if (status != null) {
             try {
                 findByCategoryStatus(request, response);
             } catch (SQLException e) {
@@ -94,13 +94,16 @@ public class CategoryServlet extends HttpServlet {
 
     private void findByCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             ServletException, IOException {
+
         String status = request.getParameter("status");
         List<Category> categories = this.categoryService.findByStatus(status);
 
         RequestDispatcher requestDispatcher;
-        if (categories == null){
+
+        if (categories == null) {
             requestDispatcher = request.getRequestDispatcher("error-404.jsp");
-        }else {
+        } else
+            {
             request.setAttribute("categories", categories);
             requestDispatcher = request.getRequestDispatcher("listCategory/list_category.jsp");
             requestDispatcher.forward(request, response);
@@ -108,13 +111,14 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showFindByCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCategory/list_category.jsp");
         requestDispatcher.forward(request, response);
     }
 
 
-
     private void findAllCategoryStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<String> statuses = this.clothingService.findAllCategoryStatus();
         request.setAttribute("statuses", statuses);
 
@@ -123,10 +127,12 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void listClothingCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Clothing> clothing = this.clothingService.findAllClothingCategory();
         request.setAttribute("clothing", clothing);
+
         List<Category> categories = this.categoryService.findAll();
-        request.setAttribute("categories",categories);
+        request.setAttribute("categories", categories);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listHome/list_clothing_category.jsp");
         requestDispatcher.forward(request, response);
@@ -134,6 +140,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void showListCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             IOException, ServletException {
+
         List<Category> categories = this.categoryService.findAll();
         request.setAttribute("categories", categories);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCategory/list_category.jsp");
@@ -143,6 +150,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void createCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             IOException, ServletException {
+
         String name = request.getParameter("category_name");
         String status = request.getParameter("status");
         Category category = new Category(name, status);
@@ -155,6 +163,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void showCreateCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             ServletException, IOException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCategory/create_category.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -162,6 +171,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void editCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             ServletException, IOException {
+
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("category_name");
         String status = request.getParameter("status");
@@ -176,6 +186,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void showEditCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
         int id = Integer.parseInt(request.getParameter("id"));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCategory/edit_category.jsp");
         requestDispatcher.forward(request, response);
@@ -183,6 +194,7 @@ public class CategoryServlet extends HttpServlet {
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException,
             ServletException, IOException {
+
         int id = Integer.parseInt(request.getParameter("id"));
         this.categoryService.remove(id);
         List<Category> categories = this.categoryService.findAll();

@@ -24,6 +24,7 @@ public class ClothingServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
@@ -97,25 +98,28 @@ public class ClothingServlet extends HttpServlet {
 
     private void findByClothingStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
         String status = request.getParameter("status");
         List<Clothing> clothing = this.clothingService.findAllByStatus(status);
         request.setAttribute("clothing", clothing);
 
         List<String> statuses = this.clothingService.findAllCategoryStatus();
         request.setAttribute("statuses", statuses);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listHome/list_clothing_category.jsp");
         requestDispatcher.forward(request, response);
 
     }
 
     private void findByPrice(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+
         int price = Integer.parseInt(request.getParameter("price"));
         List<Clothing> list = this.clothingService.findByPrice(price);
         RequestDispatcher requestDispatcher;
         if (list == null){
             requestDispatcher = request.getRequestDispatcher("error-404.jsp");
         }else {
-            request.setAttribute("clothing", list);//truyền tên biến tìm kiếm giống tên list quần áo
+            request.setAttribute("clothing", list);
             requestDispatcher = request.getRequestDispatcher("listClothing/list_clothing.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -146,7 +150,7 @@ public class ClothingServlet extends HttpServlet {
 
         List<Clothing> clothing = this.clothingService.findAll();
         request.setAttribute("clothing", clothing);
-        //
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listClothing/list_clothing.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -174,6 +178,7 @@ public class ClothingServlet extends HttpServlet {
 
     private void showCreateClothing(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("listClothing/create_clothing.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -188,7 +193,6 @@ public class ClothingServlet extends HttpServlet {
         String picture = request.getParameter("picture");
         int price = Integer.parseInt(request.getParameter("price"));
         String origin = request.getParameter("origin");
-        //int category_id = Integer.parseInt(request.getParameter("category_id"));
 
         Clothing clothing = new Clothing(id, name, description, picture, price, origin);
         this.clothingService.update(clothing);
@@ -218,9 +222,7 @@ public class ClothingServlet extends HttpServlet {
     private void findByCategoryName(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
        int categoryId = Integer.parseInt(request.getParameter("category_id"));
 
-
-       //String status = request.getParameter("status");
-        List<Clothing> clothing = this.clothingService.findByCategoryID(categoryId);
+       List<Clothing> clothing = this.clothingService.findByCategoryID(categoryId);
 
        request.setAttribute("clothing", clothing);
        List<Category> categories = this.categoryService.findAll();

@@ -12,16 +12,34 @@ import java.util.List;
 
 public class ClothingServiceImpl extends DatabaseInit implements IClothingService {
 
-    String updateClothing =
-            "update clothing_manager.clothing set name = ?, description = ?, picture = ?, price = ?, origin = ? where id = ?";
+    String selectAllClothing = "SELECT * FROM clothing ";
+
+    String selectAll = "SELECT cl.id, ca.category_name, ca.status, cl.name, cl.description, cl.picture, cl.price," +
+            "cl.origin FROM category as ca INNER JOIN clothing cl on cl" + ".category_id = ca.category_id;";
+
+    String insertClothing = "insert into clothing (name, description, picture, price, origin) values (?, ?, ?, ?, ?)";
+
+    String updateClothing = "update clothing set name = ?, description = ?, picture = ?, price = ?, origin = ? where id = ?";
+
+    String deleteClothing = "delete from clothing where id = ?";
+
+    String findPriceStatement = "select * from clothing cl where cl.price = ?";
+
+    String selectAllWhereStatus = "SELECT cl.id, ca.category_name, ca.status, cl.name, cl.description, cl.picture, cl.price," +
+            "cl.origin FROM category as ca INNER JOIN clothing cl on cl.category_id = ca.category_id where ca.status like ?;";
+
+    String selectStatus = "SELECT DISTINCT c.status FROM category c";
+
+    String selectNameByID = "select cl.id, cl.name, cl.description, cl.picture, cl.price, cl.origin, ca.category_name, ca.status\n" +
+                    "from clothing cl inner join category ca on cl.category_id = ca.category_id where cl.category_id = ?";
 
     public ClothingServiceImpl() {
     }
 
     @Override
     public List<Clothing> findAll() {
+
         List<Clothing> clothing = new ArrayList<>();
-        String selectAllClothing = "SELECT * FROM clothing_manager.clothing ";
 
         try (
                 Connection connection = getConnection();
@@ -29,6 +47,7 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
         ) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
@@ -44,17 +63,17 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
         return clothing;
     }
 
-    @Override//TODO Hiển thị danh sách thông tin của cả 2 bảng
+    @Override
     public List<Clothing> findAllClothingCategory() {
+
         List<Clothing> clothingCategory = new ArrayList<>();
-        String selectAll = "SELECT cl.id, ca.category_name, ca.status, cl.name, cl.description, cl.picture, cl.price," +
-                "cl.origin FROM clothing_manager.category as ca INNER JOIN clothing_manager.clothing cl on cl" +
-                ".category_id = ca.category_id;";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(selectAll)) {
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
@@ -74,8 +93,6 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
 
     @Override
     public void insert(Clothing clothing) throws SQLException {
-        String insertClothing =
-                "insert into clothing_manager.clothing (name, description, picture, price, origin) values (?, ?, ?, ?, ?)";
 
         try (
                 Connection connection = getConnection();
@@ -96,15 +113,10 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
         }
     }
 
-//    @Override
-//    public List<Clothing> findByCategoryID(int id) {
-//        List<Clothing> clothingList = new ArrayList<>();
-//
-//    }
-
     @Override
     public boolean update(Clothing clothing) throws SQLException {
         boolean rowUpdated;
+
         try (
                 Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(updateClothing)
@@ -115,7 +127,6 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
             statement.setString(3, clothing.getPicture());
             statement.setInt(4, clothing.getPrice());
             statement.setString(5, clothing.getOrigin());
-            //statement.setInt(5, clothing.getCategory_id());
 
             statement.setInt(6, clothing.getId());
 
@@ -127,7 +138,6 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
     @Override
     public boolean remove(int id) throws SQLException {
         boolean rowDeleted;
-        String deleteClothing = "delete from clothing_manager.clothing where id = ?";
 
         try (
                 Connection connection = getConnection();
@@ -142,15 +152,16 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
     @Override
     public List<Clothing> findByPrice(int price) throws SQLException {
         List<Clothing> clothingList = new ArrayList<>();
-        String findPriceStatement = "select * from clothing_manager.clothing cl where cl.price = ?";
 
         try (
                 Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(findPriceStatement);
         ) {
+
             statement.setInt(1, price);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
@@ -197,18 +208,15 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
 
         List<Clothing> clothingCategory = new ArrayList<>();
 
-        String selectAll = "SELECT cl.id, ca.category_name, ca.status, cl.name, cl.description, cl.picture, cl.price," +
-                "cl.origin FROM clothing_manager.category as ca INNER JOIN clothing_manager.clothing cl on cl" +
-                ".category_id = ca.category_id where ca.status like ?;";
-
         try (
                 Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(selectAll);
+                PreparedStatement statement = connection.prepareStatement(selectAllWhereStatus);
 
         ) {
             statement.setString(1, "%" + status + "%");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
@@ -228,7 +236,6 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
     @Override
     public List<String> findAllCategoryStatus() {
         List<String> statuses = new ArrayList<>();
-        String selectStatus = "SELECT DISTINCT c.status FROM clothing_manager.category c";
 
         try (
                 Connection connection = getConnection();
@@ -248,16 +255,15 @@ public class ClothingServiceImpl extends DatabaseInit implements IClothingServic
 
     @Override
     public List<Clothing> findByCategoryID(int id) throws SQLException {
+
         List<Clothing> clothingList = new ArrayList<>();
-        String query =
-                "select cl.id, cl.name, cl.description, cl.picture, cl.price, cl.origin, ca.category_name, ca.status\n" +
-                "from clothing cl inner join category ca on cl.category_id = ca.category_id where cl.category_id = ?";
+
         try (
                 Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(query))
+                PreparedStatement statement = connection.prepareStatement(selectNameByID))
         {
          statement.setInt(1, id);
-         //statement.setString(2, "%" + requestStatus.trim()+ "%");
+
          ResultSet resultSet = statement.executeQuery();
          while (resultSet.next()){
             int clothing_id = resultSet.getInt(1);

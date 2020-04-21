@@ -1,8 +1,6 @@
 package model;
 
 public class Category {
-    //TODO: int >> Integer
-    //category_id >> id
     private int id;
     private String name;
     private String status;
